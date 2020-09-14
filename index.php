@@ -11,7 +11,7 @@ $SendMessageEmptyerrorMessage = "The message field is empty!";
 $SendMailSuccessMessage = "Your message has been sent successfully! You should also have received a copy. Please check your SPAMS folder if you can't find it.";
 
 //Headers
-header("Access-Control-Allow-Origin: *.andrewkeymolen.com");
+header("Access-Control-Allow-Origin: *");
 header('Access-Control-Allow-Headers: Content-Type');
 
 //JSON & POST
