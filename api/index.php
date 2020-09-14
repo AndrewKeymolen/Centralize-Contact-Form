@@ -1,10 +1,13 @@
 <?php
 // Uncomment next line if you're not using a dependency loader (such as Composer)
 // require_once '<PATH TO>/sendgrid-php.php';
-
+header("Access-Control-Allow-Origin: *");
+header('Access-Control-Allow-Headers: Content-Type');
+$rest_json = file_get_contents("php://input");
+$_POST = json_decode($rest_json, true);
 use SendGrid\Mail\Mail;
 
-$email = new Mail(); 
+$email = new Mail();
 $email->setFrom("keymolenandrew@gmail.com", "Example User");
 $email->setSubject("Sending with Twilio SendGrid is Fun");
 $email->addTo("andrewkeymolen@gmail.com", "Example User");
