@@ -107,7 +107,7 @@ if ($_POST){
   $email = new \SendGrid\Mail\Mail();
   $email->setFrom("andrewkeymolen@gmail.com", "Andrew Keymolen");
   $email->setSubject("Your copy of " . $_POST['subject']);
-  $email->addTo($senderadress, $name);
+  $email->addTo("andrewkeymolen@gmail.com", $name);
   $email->addContent(
     "text/plain", $message
   );
