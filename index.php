@@ -16,6 +16,8 @@ $_POST = json_decode($rest_json, true);
 
 require 'vendor/autoload.php';
 
+$email = new \SendGrid\Mail\Mail();
+
 if( empty($_POST['name'])) {
   echo json_encode(
     [
