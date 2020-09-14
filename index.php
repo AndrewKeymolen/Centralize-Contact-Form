@@ -80,7 +80,6 @@ if ($_POST){
   $senderadress = $_POST['email'];
   $subject = 'Contact from Centralize: ' . $name;
   $message = $_POST['message'];
-  var_dump("Validated");
 
   //copy to admin
   $email = new \SendGrid\Mail\Mail();
@@ -165,7 +164,6 @@ echo json_encode(
 }*/
 } else {
   // tell the user about error
-  var_dump("POST Error");
   echo json_encode(
     [
       "sent" => false,
