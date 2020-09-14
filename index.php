@@ -16,25 +16,132 @@ $_POST = json_decode($rest_json, true);
 
 require 'vendor/autoload.php';
 
-$email = new \SendGrid\Mail\Mail();
-$email->setFrom("andrewkeymolen@gmail.com", "Example User");
-$email->setSubject("Sending with SendGrid is Fun");
-$email->addTo("andrewkeymolen@gmail.com", "Example User");
-$email->addContent(
-    "text/plain", "and easy to do anywhere, even with PHP"
-);
-$email->addContent(
-    "text/html", "<strong>and easy to do anywhere, even with PHP</strong>"
-);
-$sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
-try {
-    $response = $sendgrid->send($email);
-    print $response->statusCode() . "\n";
-    print_r($response->headers());
-    print $response->body() . "\n";
-} catch (Exception $e) {
-    echo 'Caught exception: ',  $e->getMessage(), "\n";
+if( empty($_POST['name'])) {
+  echo json_encode(
+    [
+      "sent" => false,
+      "message" => $SendNameEmptyerrorMessage,
+      "fatalError" => false
+    ]
+  );
+  exit();
 }
+
+if(empty($_POST['email']) ) {
+  echo json_encode(
+    [
+      "sent" => false,
+      "message" => $SendMailEmptyerrorMessage,
+      "fatalError" => false
+    ]
+  );
+  exit();
+}  else {
+  $email = $_POST['email'];
+  // validating the email
+  if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    echo json_encode(
+      [
+        "sent" => false,
+        "message" => $SendMailInvaliderrorMessage,
+        "fatalError" => false
+      ]
+    );
+    exit();
+  }
+}
+
+if( empty($_POST['subject'])) {
+  echo json_encode(
+    [
+      "sent" => false,
+      "message" => $SendSubjectEmptyerrorMessage,
+      "fatalError" => false
+    ]
+  );
+  exit();
+}
+
+if( empty($_POST['message']) ) {
+  echo json_encode(
+    [
+      "sent" => false,
+      "message" => $SendMessageEmptyerrorMessage,
+      "fatalError" => false
+    ]
+  );
+  exit();
+}
+
+if ($_POST){
+  //@important: Please change this before using
+  http_response_code(200);
+  $subject = 'Contact from: ' . $_POST['name'] . ': '  . $_POST['subject'];
+  $from = $_POST['email'];
+  $name2 = $_POST['name'];
+  $subjectCopy = $_POST['subject'];
+  $message = $_POST['message'];
+  var_dump("Validated");
+
+  $email = new \SendGrid\Mail\Mail();
+  $email->setFrom($from, $name2);
+  $email->setSubject($subjectCopy);
+  $email->addTo("andrewkeymolen@gmail.com", "Andrew Keymolen");
+  $email->addContent(
+      "text/plain", $message
+  );
+  $email->addContent(
+      "text/html", $message
+  );
+  $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
+  try {
+      $response = $sendgrid->send($email);
+      print $response->statusCode() . "\n";
+      print_r($response->headers());
+      print $response->body() . "\n";
+  } catch (Exception $e) {
+      echo 'Caught exception: ',  $e->getMessage(), "\n";
+  }
+
+
+
+
+
+
+  //Actual sending email
+  /*$sendEmail = new Sender($adminEmail, $from, $subject, $message, $subjectCopy, $name2);
+  var_dump("Sender constructed");
+  if ($sendEmail->send()){
+    var_dump("Success ?");
+    echo json_encode(
+      [
+        "sent" => true,
+        "message" => $SendMailSuccessMessage,
+        "fatalError" => false
+      ]
+    );
+  } else {
+    var_dump("Send Error");
+    echo json_encode(
+      [
+        "sent" => false,
+        "message" => $SendMailFailederrorMessage,
+        "fatalError" => true
+      ]
+    );
+  }*/
+} else {
+  // tell the user about error
+  var_dump("POST Error");
+  echo json_encode(
+    [
+      "sent" => false,
+      "message" => $SendMailFailederrorMessage,
+      "fatalError" => true
+    ]
+  );
+}
+
 /*
 if( empty($_POST['name'])) {
   echo json_encode(
