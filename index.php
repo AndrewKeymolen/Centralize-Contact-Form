@@ -1,7 +1,5 @@
 <?php
 
-
-
 $adminEmail =  "andrewkeymolen@gmail.com";
 $SendMailFailederrorMessage = "Sorry, something went wrong!";
 $SendNameEmptyerrorMessage = "The name field is empty!";
