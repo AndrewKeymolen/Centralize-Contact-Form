@@ -1,5 +1,7 @@
 <?php
 
+require 'vendor/autoload.php';
+
 $adminEmail =  "andrewkeymolen@gmail.com";
 $SendMailFailederrorMessage = "Sorry, something went wrong!";
 $SendNameEmptyerrorMessage = "The name field is empty!";
@@ -13,7 +15,6 @@ header("Access-Control-Allow-Origin: *");
 header('Access-Control-Allow-Headers: Content-Type');
 $rest_json = file_get_contents("php://input");
 $_POST = json_decode($rest_json, true);
-
 
 if( empty($_POST['name'])) {
   echo json_encode(
