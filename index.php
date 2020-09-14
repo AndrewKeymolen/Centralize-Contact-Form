@@ -11,7 +11,7 @@ $SendMessageEmptyerrorMessage = "The message field is empty!";
 $SendMailSuccessMessage = "Your message has been sent successfully! You should also have received a copy. Please check your SPAMS folder if you can't find it.";
 
 //Headers
-header("Access-Control-Allow-Origin: https://www.andrewkeymolen.com/");
+header("Access-Control-Allow-Origin: https://www.andrewkeymolen.com, https://andrewkeymolen.com");
 header('Access-Control-Allow-Headers: Content-Type');
 
 //JSON & POST
@@ -91,9 +91,9 @@ if ($_POST){
 
   //copy to admin
   $email = new \SendGrid\Mail\Mail();
-  $email->setFrom("andrewkeymolen@gmail.com", "Centralize");
+  $email->setFrom($adminEmail, "Centralize");
   $email->setSubject($subject);
-  $email->addTo("andrewkeymolen@gmail.com", "Andrew Keymolen");
+  $email->addTo($adminEmail, "Andrew Keymolen");
   $email->addContent(
     "text/plain", 'Contact from: ' . $name . ', ' . $senderadress . ' - '  . $_POST['subject']
   );
@@ -116,7 +116,7 @@ if ($_POST){
 
   //copy to sender
   $email = new \SendGrid\Mail\Mail();
-  $email->setFrom("andrewkeymolen@gmail.com", "Andrew Keymolen");
+  $email->setFrom($adminEmail, "Andrew Keymolen");
   $email->setSubject("Your copy of " . $_POST['subject']);
   $email->addTo($senderadress, $name);
   $email->addContent(
