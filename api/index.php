@@ -243,4 +243,4 @@ class Sender
 		mail($email, $email_subject, $email_message, $email_headers);
     var_dump("End second mail");
   }
-}*/
+}
