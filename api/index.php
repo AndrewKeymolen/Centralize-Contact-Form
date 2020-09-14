@@ -2,7 +2,8 @@
 // Uncomment next line if you're not using a dependency loader (such as Composer)
 // require_once '<PATH TO>/sendgrid-php.php';
 header("Access-Control-Allow-Origin: *");
-header('Access-Control-Allow-Headers: Content-Type');
+header("Access-Control-Allow-Methods: POST");
+header("Access-Control-Allow-Headers: content-type");
 $rest_json = file_get_contents("php://input");
 $_POST = json_decode($rest_json, true);
 use SendGrid\Mail\Mail;
