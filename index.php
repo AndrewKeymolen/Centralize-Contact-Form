@@ -17,7 +17,7 @@ $_POST = json_decode($rest_json, true);
 require 'vendor/autoload.php';
 
 $email = new \SendGrid\Mail\Mail();
-$email->setFrom("keymolenandrew@gmail.com", "Example User");
+$email->setFrom("andrewkeymolen@gmail.com", "Example User");
 $email->setSubject("Sending with SendGrid is Fun");
 $email->addTo("andrewkeymolen@gmail.com", "Example User");
 $email->addContent(
