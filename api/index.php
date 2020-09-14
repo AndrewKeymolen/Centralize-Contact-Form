@@ -1,6 +1,6 @@
 <?php
 
-require 'vendor/autoload.php';
+/*require 'vendor/autoload.php';
 
 $email = new \SendGrid\Mail\Mail();
 $email->setFrom("test@example.com", "Example User");
@@ -20,8 +20,8 @@ try {
     echo 'Caught exception: '. $e->getMessage() ."\n";
 }
 
-/*
-<?php
+
+<?php*/
 
 $adminEmail =  "andrewkeymolen@gmail.com";
 $SendMailFailederrorMessage = "Sorry, something went wrong!";
