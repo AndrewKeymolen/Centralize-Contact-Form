@@ -1,6 +1,6 @@
 <?php
 
-require 'vendor/autoload.php';
+
 
 $adminEmail =  "andrewkeymolen@gmail.com";
 $SendMailFailederrorMessage = "Sorry, something went wrong!";
@@ -15,6 +15,8 @@ header("Access-Control-Allow-Origin: *");
 header('Access-Control-Allow-Headers: Content-Type');
 $rest_json = file_get_contents("php://input");
 $_POST = json_decode($rest_json, true);
+
+require '/../vendor/autoload.php';
 
 if( empty($_POST['name'])) {
   echo json_encode(
