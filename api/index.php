@@ -1,6 +1,6 @@
 <?php
 
-/*require 'vendor/autoload.php';
+require 'vendor/autoload.php';
 
 $email = new \SendGrid\Mail\Mail();
 $email->setFrom("test@example.com", "Example User");
@@ -21,7 +21,7 @@ try {
 }
 
 
-<?php*/
+/*
 
 $adminEmail =  "andrewkeymolen@gmail.com";
 $SendMailFailederrorMessage = "Sorry, something went wrong!";
@@ -243,4 +243,4 @@ class Sender
 		mail($email, $email_subject, $email_message, $email_headers);
     var_dump("End second mail");
   }
-}
+}*/
