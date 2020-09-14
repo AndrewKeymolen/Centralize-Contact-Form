@@ -96,18 +96,21 @@ if ($_POST){
   $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
   try {
     $response = $sendgrid->send($email);
-    print $response->statusCode() . "\n";
-    print_r($response->headers());
-    print $response->body() . "\n";
   } catch (Exception $e) {
-    echo 'Caught exception: ',  $e->getMessage(), "\n";
+    echo json_encode(
+    [
+    "sent" => false,
+    "message" => $SendMailFailederrorMessage,
+    "fatalError" => true
+    ]
+    );
   }
 
   //copy to sender
   $email = new \SendGrid\Mail\Mail();
   $email->setFrom("andrewkeymolen@gmail.com", "Andrew Keymolen");
   $email->setSubject("Your copy of " . $_POST['subject']);
-  $email->addTo("andrewkeymolen@gmail.com", $name);
+  $email->addTo($senderadress, $name);
   $email->addContent(
     "text/plain", $message
   );
@@ -117,14 +120,23 @@ if ($_POST){
   $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
   try {
     $response = $sendgrid->send($email);
-    print $response->statusCode() . "\n";
-    print_r($response->headers());
-    print $response->body() . "\n";
   } catch (Exception $e) {
-    echo 'Caught exception: ',  $e->getMessage(), "\n";
+    echo json_encode(
+    [
+    "sent" => false,
+    "message" => $SendMailFailederrorMessage,
+    "fatalError" => true
+    ]
+    );
   }
 
-
+  echo json_encode(
+  [
+  "sent" => true,
+  "message" => $SendMailSuccessMessage,
+  "fatalError" => false
+  ]
+  );
 
 
 
