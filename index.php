@@ -95,7 +95,7 @@ if ($_POST){
   );
   $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
   try {
-    $response = $sendgrid->send($email);
+    $sendgrid->send($email);
   } catch (Exception $e) {
     echo json_encode(
     [
@@ -119,7 +119,7 @@ if ($_POST){
   );
   $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
   try {
-    $response = $sendgrid->send($email);
+    $sendgrid->send($email);
   } catch (Exception $e) {
     echo json_encode(
     [
