@@ -2,6 +2,7 @@
 
 //Config
 $adminEmail =  "andrewkeymolen@gmail.com";
+$noreplyEmail =  "noreply.andrewkeymolen@gmail.com";
 $SendMailFailederrorMessage = "Sorry, something went wrong!";
 $SendNameEmptyerrorMessage = "The name field is empty!";
 $SendMailEmptyerrorMessage = "The email adress fiel is empty!";
@@ -91,7 +92,7 @@ if ($_POST){
 
   //copy to admin
   $email = new \SendGrid\Mail\Mail();
-  $email->setFrom($adminEmail, "Centralize");
+  $email->setFrom($noreplyEmail, "Centralize");
   $email->setSubject($subject);
   $email->addTo($adminEmail, "Andrew Keymolen");
   $email->addContent(
@@ -116,8 +117,8 @@ if ($_POST){
 
   //copy to sender
   $email = new \SendGrid\Mail\Mail();
-  $email->setFrom($adminEmail, "Andrew Keymolen");
-  $email->setSubject("Your copy of " . $_POST['subject']);
+  $email->setFrom($noreplyEmail, "Andrew Keymolen");
+  $email->setSubject("No reply: Your copy of " . $_POST['subject']);
   $email->addTo($senderadress, $name);
   $email->addContent(
     "text/plain", $message
